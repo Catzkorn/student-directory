@@ -31,14 +31,23 @@ def input_students
   students
 end
 
+def student_initial
+  puts "Please enter the intial of the students you want to print"
+  initial = gets.chomp
+
+  return initial
+end
+
 def print_header
   puts "The students of Villains Academy"
   puts "------------------"
 end
 
-def student_list(students)
+def student_list(students, initials)
   students.each_with_index { |student, i|
-    puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    if student[:name][0] == initials
+      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
   }
 end
 
@@ -47,6 +56,7 @@ def print_footer(names)
 end
 
 students = input_students
+si = student_initial
 print_header
-student_list(students)
+student_list(students, si)
 print_footer(students)
