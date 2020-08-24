@@ -16,16 +16,31 @@ students = [
 
 def input_students
   students = []
+  months = ["january", "february", "march", "april", "may", "june", "july",
+            "august", "september", "october", "november", "december"]
 
-  puts "Please enter the names of the students"
+  puts "Please enter the names of the student & cohort"
   puts "To finish, just hit return twice"
+  user_input = gets.chomp
 
-  name = gets.chomp
+  user = user_input.split()
 
-  while !name.empty?
-    students << { name: name, cohort: :november }
-    puts "Now we have #{students.count} students"
-    name = gets.chomp
+  while !user_input.empty?
+    if months.include? user[1]
+      students << { name: user[0], cohort: user[1].to_sym }
+      puts "Now we have #{students.count} students"
+      user_input = gets.chomp
+      user = user_input.split()
+    elsif user[1] == nil
+      students << { name: user[0], cohort: :september }
+      puts "Now we have #{students.count} students"
+      user_input = gets.chomp
+      user = user_input.split()
+    elsif !months.include? user[1]
+      puts "You entered a month that is not recognised, add name & cohort again"
+      user_input = gets.chomp
+      user = user_input.split()
+    end
   end
 
   students
